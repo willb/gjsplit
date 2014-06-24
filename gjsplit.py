@@ -13,7 +13,7 @@ def gjsplit(file, criteria):
   keyed = sorted([(tuple([feature['properties'][k] for k in criteria]), feature) for feature in features])
   for k, g in itertools.groupby(keyed, lambda x: x[0]):
     ofname = "%s%s" % ("".join([c for c in str(k) if c not in "( )#'\""]).replace(",", "-"), file)
-    struct['features'] = list(g)
+    struct['features'] = [feat[1] for feat in list(g)]
     outfile = open(ofname, "w")
     outfile.write(json.dumps(struct))
     outfile.close
